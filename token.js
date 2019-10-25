@@ -53,6 +53,13 @@ window.tokenFns = {
     }
   },
   removeToken: elToken => {
+    const elPrevNode = elToken.previousSibling;
+    const elTextBlock = elToken.closest(".text-block");
+    if (elPrevNode !== null) {
+      setEndOfContenteditable(elPrevNode);
+    } else {
+      setEndOfContenteditable(elTextBlock);
+    }
     elToken.remove();
   }
 };

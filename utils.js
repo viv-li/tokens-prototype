@@ -23,7 +23,6 @@ export function getCaretCharacterOffsetWithin(element) {
 }
 
 export function setEndOfContenteditable(contentEditableElement) {
-  contentEditableElement.focus();
   var range, selection;
   if (document.createRange) {
     //Firefox, Chrome, Opera, Safari, IE 9+
