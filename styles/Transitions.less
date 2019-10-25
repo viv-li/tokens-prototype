@@ -1,0 +1,41 @@
+// CSS transition classes needed by React and AngularJS components on mount/unmount
+
+.fade {
+  // For ReactCSSTransitionGroup
+  &-enter {
+    opacity: 0.01;
+  }
+
+  &-enter.fade-enter-active {
+    opacity: 1;
+    .transition(opacity 200ms ease-out);
+  }
+
+  &-leave {
+    opacity: 1;
+  }
+
+  &-leave.fade-leave-active {
+    opacity: 0.01;
+    .transition(opacity 200ms ease-out);
+  }
+
+  // For ngAnimate
+  &.ng-enter {
+    opacity: 0;
+    .transition(opacity 200ms ease-out);
+  }
+
+  &.ng-enter.ng-enter-active {
+    opacity: 1;
+  }
+
+  &.ng-leave {
+    opacity: 1;
+    .transition(opacity 200ms ease-out);
+  }
+
+  &.ng-leave.ng-leave-active {
+    opacity: 0;
+  }
+}

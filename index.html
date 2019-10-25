@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Tokens prototype</title>
+    <meta
+      name="description"
+      content="Prototype for adding tokens to Qwilr page"
+    />
+    <meta name="author" content="Vivian Li" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet/less" type="text/css" href="index.less" />
+  </head>
+
+  <body>
+    <div
+      id="image-library-modal"
+      class="modal fade"
+      tabindex="-1"
+      role="dialog"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Select an image</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="image-library">
+              <div class="image">
+                <img
+                  src="assets/images/profile1.jpeg"
+                  onclick="window.editorFns.onClickModalImage(event)"
+                />
+              </div>
+              <div class="image">
+                <img
+                  src="assets/images/profile2.jpeg"
+                  onclick="window.editorFns.onClickModalImage(event)"
+                />
+              </div>
+              <div class="image">
+                <img
+                  src="assets/images/profile3.jpeg"
+                  onclick="window.editorFns.onClickModalImage(event)"
+                />
+              </div>
+              <div class="image">
+                <img
+                  src="assets/images/profile4.jpeg"
+                  onclick="window.editorFns.onClickModalImage(event)"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="widget-adder">
+      <div
+        class="button"
+        onmousedown="window.editorFns.onClickWidgetAdder(event)"
+      ></div>
+      <ul>
+        <li onmousedown="window.tokenFns.onClickQuickAddToken(event)">Token</li>
+      </ul>
+    </div>
+    <!-- 
+    <div id="token-typeahead">
+    </div> -->
+
+    <div class="editor">
+      <h1
+        class="undeletable"
+        contenteditable="true"
+        onkeydown="window.editorFns.onKeyDownEditor(event)"
+        onfocus="window.editorFns.onFocusEditor(event)"
+        onblur="window.editorFns.onBlurEditor(event)"
+      ></h1>
+      <p
+        class="undeletable"
+        contenteditable="true"
+        onkeydown="window.editorFns.onKeyDownEditor(event)"
+        onfocus="window.editorFns.onFocusEditor(event)"
+        onblur="window.editorFns.onBlurEditor(event)"
+      ></p>
+      <div id="gallery_widget"></div>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js"></script>
+    <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script>
+    <script type="module" src="utils.js"></script>
+    <script type="module" src="editor-lite.js"></script>
+    <script type="module" src="token.js"></script>
+  </body>
+</html>

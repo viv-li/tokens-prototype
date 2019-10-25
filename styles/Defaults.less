@@ -1,0 +1,93 @@
+body,
+html {
+  height: 100%;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  .user-select(none);
+}
+
+// Make traditional "text" items selectable.
+// And editor <content-area> elems
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+td,
+th,
+span,
+blockquote,
+content-area {
+  .user-select(text);
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+// @TODO(vivian, 2019-04-29): Added this in to make it compile, this is unused in KL, clean it up
+@side-nav-width: 300px;
+
+// ARCHITECTURE
+#content-wrap {
+  .transition(0.3s);
+  position: absolute;
+  width: 100%;
+
+  &.main-nav-open {
+    .translateX(@side-nav-width);
+    .transition(transform 0.25s ease, opacity 0.35s ease);
+    opacity: 0.25;
+  }
+}
+
+// Text Highlight colors
+::selection {
+  background: fade(@blue, 35%);
+  color: inherit;
+}
+::-moz-selection {
+  background: fade(@blue, 35%);
+  color: inherit;
+}
+
+// Cause we're rocking Angular, we've got a bunch of custom elements.
+// Lets add some basic styles. i.e. display block
+module,
+item,
+items,
+quote,
+viewport,
+block,
+content,
+projects,
+display,
+edit,
+actions-box,
+block-border,
+block-browser,
+browser-results,
+browser-controls,
+new-item-button,
+section-actions,
+section-controls,
+quote-total,
+wrapper,
+qwilr-video,
+field,
+quote-formula-function,
+app-settings {
+  display: block;
+  outline: none;
+  -webkit-outline: none;
+}

@@ -1,0 +1,212 @@
+/* ------------------------------------------------------------------
+[Table of contents]
+
+= Font family
+= Font weights
+= Type hierarchy
+    - Font size variables
+    - Line height variables
+= List styles
+= Text link styles
+= Horizontal rule styles
+------------------------------------------------------------------- */
+
+/*
+* === FONT FAMILY ===
+*/
+.add-calibre(@suffix, @font-weight, @font-style) {
+  @font-face {
+    font-family: "calibre";
+    src: url("/Assets/fonts/CalibreWeb-@{suffix}.eot");
+    src:
+      url("/Assets/fonts/CalibreWeb-@{suffix}.eot?#iefix")
+      format("embedded-opentype"),
+      url("/Assets/fonts/CalibreWeb-@{suffix}.woff2") format("woff2"),
+      url("/Assets/fonts/CalibreWeb-@{suffix}.woff") format("woff");
+    font-weight: @font-weight;
+    font-style: @font-style;
+  }
+}
+
+.add-calibre(Regular, normal, normal);
+.add-calibre(RegularItalic, normal, italic);
+.add-calibre(Medium, 600, normal);
+.add-calibre(MediumItalic, 600, italic);
+.add-calibre(Semibold, 700, normal);
+.add-calibre(SemiboldItalic, 700, italic);
+.add-calibre(Bold, 800, normal);
+.add-calibre(BoldItalic, 800, italic);
+
+.sans {
+  font-family: "calibre", sans-serif;
+}
+
+.open-sans {
+  font-family: "calibre", sans-serif;
+}
+
+.calibre {
+  font-family: "calibre", sans-serif;
+}
+
+/*
+* === FONT WEIGHTS ===
+*/
+.italic {
+  font-style: italic;
+}
+
+.light {
+  font-weight: 300;
+}
+
+.regular {
+  font-weight: 400;
+}
+
+.medium {
+  font-weight: 600;
+}
+
+.semi-bold {
+  font-weight: 600;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+/*
+* === TYPE HIERARCHY ===
+*/
+
+// Font size variables - do not use these variables directly!
+// Instead try to use the type hierarchy mixins below.
+@font-size-base: 16px;
+@font-size-xxl: 3 * @font-size-base; // 48px
+@font-size-xl: 2 * @font-size-base; // 32px
+@font-size-l: 1.5 * @font-size-base; // 24px
+@font-size-m: 1.25 * @font-size-base; // 20px
+@font-size-s: 1.125 * @font-size-base; // 18px
+@font-size-xs: @font-size-base; // 16px
+@font-size-xxs: 0.875 * @font-size-base; // 14px
+@font-size-default: @font-size-xs; //16px
+
+// Line height variables
+@line-height-default: 1;
+@line-height-heading: 1.2;
+@line-height-label: 1;
+@line-height-desc: 1.2;
+@line-height-list: 1.5;
+@line-height-para: 1.5;
+
+.text-h1 {
+  font-size: @font-size-xxl;
+  line-height: @line-height-heading;
+  padding: 0.65em 0 0.2em 0;
+  .regular;
+  // .space-stack-l;
+}
+
+.text-h2 {
+  font-size: @font-size-xl;
+  line-height: @line-height-heading;
+  padding: 0.65em 0 0.4em 0;
+  .regular;
+  // .space-stack-l;
+}
+
+.text-h3 {
+  font-size: @font-size-l;
+  line-height: @line-height-heading;
+  .regular;
+  .space-stack-default;
+}
+
+.text-h4 {
+  font-size: @font-size-m;
+  line-height: @line-height-heading;
+  .medium;
+  .space-stack-default;
+}
+
+.text-h5 {
+  font-size: @font-size-s;
+  line-height: @line-height-para;
+  .space-stack-default;
+  .medium;
+}
+
+.text-h6 {
+  font-size: @font-size-xs;
+  line-height: @line-height-para;
+  .space-stack-default;
+  .medium;
+}
+
+.text-large-label {
+  font-size: @font-size-s;
+  line-height: @line-height-label;
+  .medium;
+}
+
+.text-small-label {
+  font-size: @font-size-xxs;
+  line-height: @line-height-label;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  .semi-bold;
+}
+
+.text-context-label {
+  font-size: @font-size-s;
+  line-height: @line-height-label;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  .semi-bold;
+}
+
+.text-description {
+  font-size: @font-size-xxs;
+  line-height: @line-height-desc;
+  .space-stack-default;
+  .regular;
+}
+
+.text-paragraph {
+  font-size: @font-size-default;
+  line-height: @line-height-para;
+  .space-stack-default;
+  .regular;
+}
+
+/*
+* === TEXT LINK STYLES ===
+*/
+.text-link {
+  .regular;
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 2px solid fade(@emerald, 50%);
+  transition: all 0.25s ease;
+
+  &:hover {
+    color: @midnight;
+    border-bottom: 2px solid @emerald;
+  }
+
+  &:visited {
+    color: inherit;
+  }
+}
+
+.text-button {
+  .text-context-label;
+  color: @emerald;
+
+  &:hover,
+  &:visited {
+    color: @emerald;
+  }
+}

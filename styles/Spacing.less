@@ -1,0 +1,87 @@
+@space-base: 8px;
+
+@space-xs: 0.5 * @space-base;
+@space-s: @space-base;
+@space-m: 2 * @space-base;
+@space-l: 3 * @space-base;
+@space-xl: 5 * @space-base;
+@space-default: @space-m;
+
+// Inset mixins - for padding inside a container
+.space-inset-xs {
+  padding: @space-xs;
+}
+.space-inset-s {
+  padding: @space-s;
+}
+.space-inset-m {
+  padding: @space-m;
+}
+.space-inset-l {
+  padding: @space-l;
+}
+.space-inset-xl {
+  padding: @space-xl;
+}
+.space-inset-default {
+  .space-inset-m;
+}
+
+// Inset squish mixins - for squished padding like in buttons
+// Top and bottom padding is 50% of left and right padding.\
+.space-inset-squish-s {
+  padding: @space-xs @space-s;
+}
+.space-inset-squish-m {
+  padding: @space-s @space-m;
+}
+.space-inset-squish-l {
+  padding: @space-m @space-l;
+}
+.space-inset-squish-default {
+  .space-inset-squish-m;
+}
+
+// Stack mixins - for margins after stacked blocks
+.space-stack-xs {
+  margin-bottom: @space-xs;
+}
+.space-stack-s {
+  margin-bottom: @space-s;
+}
+.space-stack-m {
+  margin-bottom: @space-m;
+}
+.space-stack-l {
+  margin-bottom: @space-l;
+}
+.space-stack-xl {
+  margin-bottom: @space-xl;
+}
+.space-stack-default {
+  .space-stack-m;
+}
+
+// Inline mixins - for margins to the right of inline elements
+.space-inline-xs {
+  margin-right: @space-xs;
+}
+.space-inline-s {
+  margin-right: @space-s;
+}
+.space-inline-m {
+  margin-right: @space-m;
+}
+.space-inline-l {
+  margin-right: @space-l;
+}
+.space-inline-xl {
+  margin-right: @space-xl;
+}
+.space-inline-default {
+  .space-inline-m;
+}
+
+.border-radius-xs {
+  border-radius: @space-xs;
+}
