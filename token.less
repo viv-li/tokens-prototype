@@ -6,10 +6,10 @@
   border-radius: 96px;
   border: 1px solid fade(@blue, 50%);
   transition: background-color ease-out 250ms;
-
+  
   &.incomplete {
     background-color: fade(@blue, 5%);
-
+    
     &:before {
       content: "{{";
       margin-left: -16px;
@@ -17,11 +17,12 @@
 
     padding-left: 24px;
   }
-
+  
   &__input {
     margin-left: -6px;
     outline: none;
     background: none;
     border: none;
+    color: inherit;
   }
 }
