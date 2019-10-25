@@ -87,20 +87,21 @@
 
     <div class="editor">
       <h1
-        class="undeletable"
+        class="text-block undeletable"
         contenteditable="true"
         onkeydown="window.editorFns.onKeyDownEditor(event)"
+        onkeyup="window.editorFns.onKeyUpEditor(event)"
         onfocus="window.editorFns.onFocusEditor(event)"
         onblur="window.editorFns.onBlurEditor(event)"
       ></h1>
       <p
-        class="undeletable"
+        class="text-block undeletable"
         contenteditable="true"
         onkeydown="window.editorFns.onKeyDownEditor(event)"
+        onkeyup="window.editorFns.onKeyUpEditor(event)"
         onfocus="window.editorFns.onFocusEditor(event)"
         onblur="window.editorFns.onBlurEditor(event)"
       ></p>
-      <div id="gallery_widget"></div>
     </div>
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -119,7 +120,6 @@
     ></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js"></script>
     <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script>
-    <script type="module" src="utils.js"></script>
     <script type="module" src="editor-lite.js"></script>
     <script type="module" src="token.js"></script>
   </body>

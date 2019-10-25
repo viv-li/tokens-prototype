@@ -41,10 +41,16 @@ window.tokenFns = {
   },
   completeToken: elToken => {
     const elTokenInput = elToken.querySelector("input");
-    elToken.innerHTML = elTokenInput.value.replace(/}$/, "");
-    elToken.classList.remove("incomplete");
-    elToken.parentElement.appendChild(document.createTextNode("\u00A0"));
-    setEndOfContenteditable(elToken.parentElement);
+    const tokenValue = elTokenInput.value.replace(/}$/, "");
+    if (tokenValue === "") {
+      setEndOfContenteditable(elToken.parentElement);
+      window.tokenFns.removeToken(elToken);
+    } else {
+      elToken.innerHTML = tokenValue;
+      elToken.classList.remove("incomplete");
+      elToken.parentElement.appendChild(document.createTextNode("\u00A0"));
+      setEndOfContenteditable(elToken.parentElement);
+    }
   },
   removeToken: elToken => {
     elToken.remove();

@@ -66,16 +66,7 @@ window.editorFns = {
       const selectedWidget = document.querySelector(".selected");
       if (selectedWidget !== null) {
         e.preventDefault();
-        const $newLine = $(
-          `<p
-              contenteditable="true"
-              onkeydown="window.editorFns.onKeyDownEditor(event)"
-              onfocus="window.editorFns.onFocusEditor(event)"
-              onblur="window.editorFns.onBlurEditor(event)"
-            ></p>`
-        );
-        $newLine.insertAfter(selectedWidget);
-        $newLine.focus();
+        window.editorFns.createNewTextBlockAfter(selectedWidget);
         return false;
       }
     }
@@ -102,24 +93,34 @@ window.editorFns = {
     }
   },
 
+  createNewTextBlockAfter: elTextBlock => {
+    const $newLine = $(
+      `<p
+          class="text-block"
+          contenteditable="true"
+          onkeydown="window.editorFns.onKeyDownEditor(event)"
+          onkeyup="window.editorFns.onKeyUpEditor(event)"
+          onfocus="window.editorFns.onFocusEditor(event)"
+          onblur="window.editorFns.onBlurEditor(event)"
+        ></p>`
+    );
+    $newLine.insertAfter(elTextBlock);
+    $newLine.focus();
+    return $newLine[0];
+  },
+
   // For key behaviour within editor text blocks
   onKeyDownEditor: e => {
     const key = event.key; // const {key} = event; ES6+
+
+    // Adding new text block
     if (key === "Enter") {
       e.preventDefault();
       e.stopPropagation();
-      const $newLine = $(
-        `<p
-            contenteditable="true"
-            onkeydown="window.editorFns.onKeyDownEditor(event)"
-            onfocus="window.editorFns.onFocusEditor(event)"
-            onblur="window.editorFns.onBlurEditor(event)"
-          ></p>`
-      );
-      $newLine.insertAfter(e.target);
-      $newLine.focus();
-      return false;
-    } else if (key === "Backspace" || key === "Delete") {
+    }
+
+    // Deleting or merging text blocks across lines
+    else if (key === "Backspace" || key === "Delete") {
       e.stopPropagation();
       // if block is empty try deleting it
       if (
@@ -131,7 +132,7 @@ window.editorFns = {
         setEndOfContenteditable(e.target.previousElementSibling);
         e.target.remove();
       }
-      // merge with previous line if caret is at beginning
+      // merge with previous line if line not empty and caret is at beginning
       else if (
         getCaretCharacterOffsetWithin(e.target) === 0 &&
         !$(e.target).is(":first-child")
@@ -145,31 +146,56 @@ window.editorFns = {
           }
         }
       }
-      return false;
     }
 
     // Start a token if you type {{
     else if (key === "{" && e.target.textContent.slice(-1) === "{") {
       e.preventDefault();
       const removeBracket = e.target.lastChild.textContent.slice(0, -1);
-      console.log(removeBracket);
       e.target.lastChild.textContent = removeBracket;
       window.tokenFns.onClickQuickAddToken();
     }
-
-    return true;
   },
+
+  onKeyUpEditor: e => {
+    const key = event.key; // const {key} = event; ES6+
+    window.editorFns.positionWidgetAdder(e.target.closest(".text-block"));
+  },
+
   onFocusEditor: e => {
-    const elWA = document.getElementById("widget-adder");
     window.editorFns.unselectAllWidgets();
-
-    // position the widget adder to the focussed line
-    const { top, left, height } = e.target.getBoundingClientRect();
-    elWA.style.top = `${window.scrollY + top + height / 2}px`;
-    elWA.style.left = `${window.scrollX + left - 40}px`;
-
+    window.editorFns.positionWidgetAdder(e.target);
     window.lastFocussedLine = e.target;
   },
+
+  positionWidgetAdder: elTextBlock => {
+    const elWA = document.getElementById("widget-adder");
+    const { top, left, height } = elTextBlock.getBoundingClientRect();
+    // If it's an empty line position quick add beside it
+    if (elTextBlock.textContent === "" || elTextBlock.textContent === "+") {
+      elWA.style.top = `${window.scrollY + top + height / 2}px`;
+    }
+
+    // If the line with text is the last text block, position underneath
+    else if (
+      $(".editor")
+        .children()
+        .last()[0] === elTextBlock
+    ) {
+      elWA.style.top = `${window.scrollY + top + height / 2 + 46}px`;
+    }
+
+    // Put it after the last block
+    else {
+      const elLastBlock = $(".editor")
+        .children()
+        .last()[0];
+      const { top, height } = elLastBlock.getBoundingClientRect();
+      elWA.style.top = `${window.scrollY + top + height / 2 + 46}px`;
+    }
+    elWA.style.left = `${window.scrollX + left - 40}px`;
+  },
+
   onBlurEditor: e => {
     if (e.target.id !== "widget-adder") {
       window.editorFns.hideWidgetAdder();
@@ -183,6 +209,10 @@ window.editorFns = {
   },
   onClickWidgetAdder: e => {
     e.preventDefault();
+
+    if (window.lastFocussedLine.textContent !== "") {
+      window.editorFns.createNewTextBlockAfter(window.lastFocussedLine);
+    }
     const elWA = document.getElementById("widget-adder");
     elWA.classList.toggle("show-menu");
   },
