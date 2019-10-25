@@ -111,12 +111,14 @@ window.editorFns = {
 
   // For key behaviour within editor text blocks
   onKeyDownEditor: e => {
+    const elTextBlock = e.target.closest(".text-block");
     const key = event.key; // const {key} = event; ES6+
 
     // Adding new text block
     if (key === "Enter") {
       e.preventDefault();
       e.stopPropagation();
+      window.editorFns.createNewTextBlockAfter(elTextBlock);
     }
 
     // Deleting or merging text blocks across lines
@@ -124,42 +126,42 @@ window.editorFns = {
       e.stopPropagation();
       // if block is empty try deleting it
       if (
-        e.target.textContent === "" &&
-        !e.target.classList.contains("undeletable") &&
-        !$(e.target).is(":first-child")
+        elTextBlock.textContent === "" &&
+        !elTextBlock.classList.contains("undeletable") &&
+        !$(elTextBlock).is(":first-child")
       ) {
         e.preventDefault();
-        setEndOfContenteditable(e.target.previousElementSibling);
-        e.target.remove();
+        setEndOfContenteditable(elTextBlock.previousElementSibling);
+        elTextBlock.remove();
       }
       // merge with previous line if line not empty and caret is at beginning
       else if (
-        getCaretCharacterOffsetWithin(e.target) === 0 &&
-        !$(e.target).is(":first-child")
+        getCaretCharacterOffsetWithin(elTextBlock) === 0 &&
+        !$(elTextBlock).is(":first-child")
       ) {
         e.preventDefault();
-        setEndOfContenteditable(e.target.previousElementSibling);
-        for (let $el of $(e.target).contents()) {
-          e.target.previousElementSibling.append($el);
-          if (!e.target.classList.contains("undeletable")) {
-            e.target.remove();
+        setEndOfContenteditable(elTextBlock.previousElementSibling);
+        for (let $el of $(elTextBlock).contents()) {
+          elTextBlock.previousElementSibling.append($el);
+          if (!elTextBlock.classList.contains("undeletable")) {
+            elTextBlock.remove();
           }
         }
       }
     }
 
     // Start a token if you type {{
-    else if (key === "{" && e.target.textContent.slice(-1) === "{") {
+    else if (key === "{" && elTextBlock.textContent.slice(-1) === "{") {
       e.preventDefault();
-      const removeBracket = e.target.lastChild.textContent.slice(0, -1);
-      e.target.lastChild.textContent = removeBracket;
+      const removeBracket = elTextBlock.lastChild.textContent.slice(0, -1);
+      elTextBlock.lastChild.textContent = removeBracket;
       window.tokenFns.onClickQuickAddToken();
     }
   },
 
   onKeyUpEditor: e => {
-    const key = event.key; // const {key} = event; ES6+
-    window.editorFns.positionWidgetAdder(e.target.closest(".text-block"));
+    const elTextBlock = e.target.closest(".text-block");
+    window.editorFns.positionWidgetAdder(elTextBlock);
   },
 
   onFocusEditor: e => {
