@@ -137,8 +137,8 @@ window.editorFns = {
         !$(e.target).is(":first-child")
       ) {
         e.preventDefault();
+        setEndOfContenteditable(e.target.previousElementSibling);
         for (let $el of $(e.target).contents()) {
-          setEndOfContenteditable(e.target.previousElementSibling);
           e.target.previousElementSibling.append($el);
           if (!e.target.classList.contains("undeletable")) {
             e.target.remove();
