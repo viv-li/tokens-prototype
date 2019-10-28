@@ -89,7 +89,7 @@ strong {
     }
     
     color: @grey;
-    border: 1px solid @grey;
+    border: 1px solid @grey-25;
     background-color: white;
     width: 36px;
     height: 36px;
@@ -98,9 +98,7 @@ strong {
     cursor: pointer;
 
     &:hover, &:active {
-      background-color: @blue;
-      color: white;
-      border-color: @blue;
+      box-shadow: 0 0 0 3px @grey-25
     }
   }
 
@@ -110,7 +108,6 @@ strong {
     width: 160px;
     left: 40px;
     top: 40px;
-    background: @blue;
     border-radius: 4px;
     box-shadow: 0 15px 25px 0 fade(@midnight, 10%);
 
@@ -121,14 +118,16 @@ strong {
       padding: 16px;
       color: white;
       cursor: pointer;
+
+      &:hover {
+        background-color: @midnight;
+      }
     }
   }
 
   &.show-menu {
     .button {
-      background-color: @blue;
-      color: white;
-      border: 1px solid @blue;
+      box-shadow: 0 0 0 3px @grey-25
     }
     ul { display: block;}
   }

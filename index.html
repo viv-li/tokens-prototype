@@ -77,7 +77,16 @@
         class="button"
         onmousedown="window.editorFns.onClickWidgetAdder(event)"
       ></div>
-      <ul>
+      <ul class="panel--dark">
+        <li onmousedown="window.editorFns.thisIsAPrototype(event)">Image</li>
+        <li onmousedown="window.editorFns.thisIsAPrototype(event)">Video</li>
+        <li onmousedown="window.editorFns.thisIsAPrototype(event)">Table</li>
+        <li onmousedown="window.editorFns.thisIsAPrototype(event)">
+          Two columns
+        </li>
+        <li onmousedown="window.editorFns.thisIsAPrototype(event)">
+          Google maps
+        </li>
         <li onmousedown="window.tokenFns.onClickQuickAddToken(event)">Token</li>
       </ul>
     </div>
@@ -94,14 +103,14 @@
         onfocus="window.editorFns.onFocusEditor(event)"
         onblur="window.editorFns.onBlurEditor(event)"
       ></h1>
-      <p
+      <!-- <p
         class="text-block undeletable"
         contenteditable="true"
         onkeydown="window.editorFns.onKeyDownEditor(event)"
         onkeyup="window.editorFns.onKeyUpEditor(event)"
         onfocus="window.editorFns.onFocusEditor(event)"
         onblur="window.editorFns.onBlurEditor(event)"
-      ></p>
+      ></p> -->
     </div>
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
