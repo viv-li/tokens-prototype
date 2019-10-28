@@ -1,6 +1,7 @@
 import {
   getCaretCharacterOffsetWithin,
-  setEndOfContenteditable
+  setEndOfContenteditable,
+  insertNodeAtCursor
 } from "./utils.js";
 
 interact(".image-resizer")
@@ -140,9 +141,10 @@ window.editorFns = {
         !$(elTextBlock).is(":first-child")
       ) {
         e.preventDefault();
-        setEndOfContenteditable(elTextBlock.previousElementSibling);
-        for (let $el of $(elTextBlock).contents()) {
-          elTextBlock.previousElementSibling.append($el);
+        const elPrevTextBlock = elTextBlock.previousElementSibling;
+        setEndOfContenteditable(elPrevTextBlock);
+        for (let el of $(elTextBlock).contents()) {
+          elPrevTextBlock.appendChild(el);
           if (!elTextBlock.classList.contains("undeletable")) {
             elTextBlock.remove();
           }
@@ -151,12 +153,18 @@ window.editorFns = {
     }
 
     // Start a token if you type {{
-    else if (key === "{" && elTextBlock.textContent.slice(-1) === "{") {
+    else if (
+      key === "{" &&
+      window.lastKeyDownTextBlock === elTextBlock &&
+      window.lastKeyDownKey === "{"
+    ) {
       e.preventDefault();
-      const removeBracket = elTextBlock.lastChild.textContent.slice(0, -1);
-      elTextBlock.lastChild.textContent = removeBracket;
-      window.tokenFns.onClickQuickAddToken();
+      insertNodeAtCursor(document.createTextNode(""), 1);
+      window.tokenFns.addTokenAtCursor();
     }
+
+    window.lastKeyDownTextBlock = elTextBlock;
+    window.lastKeyDownKey = key;
   },
 
   onKeyUpEditor: e => {
@@ -264,6 +272,14 @@ window.editorFns = {
       selectedWidget.remove();
       window.editorFns.hideAllToolbars();
     }
+  },
+
+  thisIsAPrototype: e => {
+    e.preventDefault();
+    e.stopPropagation();
+    window.alert(
+      "This is only a prototype, so this function has been disabled!"
+    );
   }
 };
 

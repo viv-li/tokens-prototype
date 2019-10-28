@@ -1,4 +1,4 @@
-import { setEndOfContenteditable } from "./utils.js";
+import { setEndOfContenteditable, insertNodeAtCursor } from "./utils.js";
 
 window.tokenFns = {
   onClickQuickAddToken: e => {
@@ -20,6 +20,21 @@ window.tokenFns = {
       $token.find("input")[0].focus();
     }, 0);
   },
+
+  addTokenAtCursor: () => {
+    const $token = $(
+      `<span class="token incomplete" contenteditable="false">
+        <input class="token__input" type="text" autofocus onkeydown="window.tokenFns.onKeyDownTokenInput(event)">
+      </span>`
+    );
+
+    insertNodeAtCursor($token[0]);
+
+    setTimeout(() => {
+      $token.find("input")[0].focus();
+    }, 0);
+  },
+
   onKeyDownTokenInput: e => {
     const key = event.key; // const {key} = event; ES6+
     const elToken = e.target.parentElement;
@@ -48,8 +63,9 @@ window.tokenFns = {
     } else {
       elToken.innerHTML = tokenValue;
       elToken.classList.remove("incomplete");
-      elToken.parentElement.appendChild(document.createTextNode("\u00A0"));
-      setEndOfContenteditable(elToken.parentElement);
+      const elSpaceTextNode = document.createTextNode("\u00A0");
+      $(elSpaceTextNode).insertAfter(elToken);
+      setEndOfContenteditable(elSpaceTextNode);
     }
   },
   removeToken: elToken => {

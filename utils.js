@@ -40,3 +40,33 @@ export function setEndOfContenteditable(contentEditableElement) {
     range.select(); //Select the range (make it the visible selection
   }
 }
+
+export function insertNodeAtCursor(node, stepback) {
+  var sel, range, textNode;
+  if (window.getSelection) {
+    sel = window.getSelection();
+    if (sel.getRangeAt && sel.rangeCount) {
+      range = sel.getRangeAt(0);
+
+      // This clones the selected range and then selects 1
+      // 1 character in the backward direction and deletes it.
+      if (stepback) {
+        const clone = range.cloneRange();
+        clone.setStart(range.startContainer, range.startOffset - 1);
+        clone.setEnd(range.startContainer, range.startOffset);
+        clone.deleteContents();
+      }
+      range.insertNode(node);
+
+      // Move caret to the end of the newly inserted text node
+      range.setStart(node, node.length);
+      range.setEnd(node, node.length);
+
+      sel.removeAllRanges();
+      sel.addRange(range);
+    }
+  } else if (document.selection && document.selection.createRange) {
+    range = document.selection.createRange();
+    range.pasteHTML(text);
+  }
+}
