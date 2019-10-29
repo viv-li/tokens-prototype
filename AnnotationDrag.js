@@ -67,7 +67,6 @@ function AnnotationDrag(args) {
     // Bind draggable dragstart
     this.$draggables.off("dragstart").on("dragstart", this.onDragStart);
     this.$draggables.off("dragend").on("dragend", this.onDragEnd);
-    console.log("bindDraggables", this.$draggables);
   };
 
   /*
@@ -77,7 +76,6 @@ function AnnotationDrag(args) {
     this.$dropzones = $(this.$dropzones.selector); // reselecting
     this.$dropzones.off("dragleave").on("dragleave", this.onDragLeave);
     this.$dropzones.off("drop").on("drop", this.onDrop);
-    console.log("bindDropzones", this.$dropzones);
   };
 
   /*
@@ -171,7 +169,13 @@ function AnnotationDrag(args) {
     }
 
     // Insert drop load at target
-    range.insertNode(this.dropLoadNode);
+    if (this.dropLoadNode.classList.contains("master")) {
+      const clonedNode = this.dropLoadNode.cloneNode(true);
+      clonedNode.classList.remove("master");
+      range.insertNode(clonedNode);
+    } else {
+      range.insertNode(this.dropLoadNode);
+    }
 
     // Insert in original range after node was placed so it stays before
     if (needsSpaceBefore) {

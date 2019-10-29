@@ -39,10 +39,15 @@ strong {
   .semi-bold;
 }
 
-.panel--dark {
+.panel {
   border-radius: 4px;
   border: 1px solid fade(@grey, 25%);
   box-shadow: 0 15px 25px 0 fade(@midnight, 10%);
+  background-color: white;
+}
+
+.panel--dark {
+  .panel;
   background-color: @slate; 
   color: white;
 }
