@@ -93,16 +93,20 @@
     <!-- 
     <div id="token-typeahead">
     </div> -->
-
     <div class="editor">
       <h1
-        class="text-block undeletable"
+        class="text-block undeletable dropzone"
         contenteditable="true"
         onkeydown="window.editorFns.onKeyDownEditor(event)"
         onkeyup="window.editorFns.onKeyUpEditor(event)"
         onfocus="window.editorFns.onFocusEditor(event)"
         onblur="window.editorFns.onBlurEditor(event)"
-      ></h1>
+      >
+        A proposal for
+        <span class="token draggable" contenteditable="false"
+          >Company.Name</span
+        >
+      </h1>
       <!-- <p
         class="text-block undeletable"
         contenteditable="true"
@@ -112,11 +116,7 @@
         onblur="window.editorFns.onBlurEditor(event)"
       ></p> -->
     </div>
-    <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
       integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -129,6 +129,8 @@
     ></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js"></script>
     <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script>
+
+    <script src="AnnotationDrag.js"></script>
     <script type="module" src="editor-lite.js"></script>
     <script type="module" src="token.js"></script>
   </body>

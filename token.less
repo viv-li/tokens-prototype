@@ -6,7 +6,13 @@
   border-radius: 96px;
   border: 1px solid fade(@blue, 50%);
   transition: background-color ease-out 250ms;
-  
+  white-space: nowrap;
+  max-width: 400px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+  margin-bottom: -1px;
+
   &.incomplete {
     background-color: fade(@blue, 5%);
     
@@ -25,4 +31,13 @@
     border: none;
     color: inherit;
   }
+}
+
+.draggable {
+  position: relative;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: element;
+  cursor: grab !important;
 }

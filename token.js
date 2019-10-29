@@ -3,7 +3,7 @@ import { setEndOfContenteditable, insertNodeAtCursor } from "./utils.js";
 window.tokenFns = {
   onClickQuickAddToken: e => {
     const $token = $(
-      `<span class="token incomplete" contenteditable="false">
+      `<span class="token draggable incomplete" contenteditable="false">
         <input class="token__input" type="text" autofocus onkeydown="window.tokenFns.onKeyDownTokenInput(event)">
       </span>`
     );
@@ -16,6 +16,8 @@ window.tokenFns = {
       textBlock.lastChild.textContent += "\u00A0";
     }
     $token.appendTo(textBlock);
+    window.TokenDrag.bindDraggables();
+
     setTimeout(() => {
       $token.find("input")[0].focus();
     }, 0);
@@ -23,12 +25,13 @@ window.tokenFns = {
 
   addTokenAtCursor: () => {
     const $token = $(
-      `<span class="token incomplete" contenteditable="false">
+      `<span class="token draggable incomplete" contenteditable="false">
         <input class="token__input" type="text" autofocus onkeydown="window.tokenFns.onKeyDownTokenInput(event)">
       </span>`
     );
 
     insertNodeAtCursor($token[0]);
+    window.TokenDrag.bindDraggables();
 
     setTimeout(() => {
       $token.find("input")[0].focus();

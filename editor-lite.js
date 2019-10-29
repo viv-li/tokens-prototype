@@ -97,7 +97,7 @@ window.editorFns = {
   createNewTextBlockAfter: elTextBlock => {
     const $newLine = $(
       `<p
-          class="text-block"
+          class="text-block dropzone"
           contenteditable="true"
           onkeydown="window.editorFns.onKeyDownEditor(event)"
           onkeyup="window.editorFns.onKeyUpEditor(event)"
@@ -106,6 +106,7 @@ window.editorFns = {
         ></p>`
     );
     $newLine.insertAfter(elTextBlock);
+    window.TokenDrag.bindDropzones();
     $newLine.focus();
     return $newLine[0];
   },
