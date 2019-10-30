@@ -106,8 +106,11 @@ function AnnotationDrag(args) {
        * This allows to handle any whitespace left behind
        * After drop ends
        */
-      const afterRange = this.getRangeAfterNode(target, 1);
-      afterRange.insertNode(this.generateSourceMarker());
+      if (!target.classList.contains("master")) {
+        // @viv: don't worry about leaving whitespace behind if it's a master, because we clone from it
+        const afterRange = this.getRangeAfterNode(target, 1);
+        afterRange.insertNode(this.generateSourceMarker());
+      }
 
       dt.effectAllowed = "copy";
       dt.setData("text/plain", " ");
