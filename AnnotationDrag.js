@@ -27,7 +27,7 @@ function AnnotationDrag(args) {
   /*
    * Space node generator
    */
-  this.generateSpaceNode = () => document.createTextNode(" ");
+  this.generateSpaceNode = () => document.createTextNode("\u00A0");
 
   /*
    * Drag source marker generator
