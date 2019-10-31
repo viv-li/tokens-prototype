@@ -180,11 +180,14 @@ window.editorFns = {
   },
 
   positionWidgetAdder: elTextBlock => {
+    const scrollTop = document.querySelector(".scroll-area").scrollTop;
+    const navHeight = 68;
     const elWA = document.getElementById("widget-adder");
     const { top, left, height } = elTextBlock.getBoundingClientRect();
+    console.log(top, left, height);
     // If it's an empty line position quick add beside it
     if (elTextBlock.textContent === "" || elTextBlock.textContent === "+") {
-      elWA.style.top = `${window.scrollY + top + height / 2}px`;
+      elWA.style.top = `${scrollTop - navHeight + top + height / 2}px`;
     }
 
     // If the line with text is the last text block, position underneath
@@ -193,7 +196,7 @@ window.editorFns = {
         .children()
         .last()[0] === elTextBlock
     ) {
-      elWA.style.top = `${window.scrollY + top + height / 2 + 46}px`;
+      elWA.style.top = `${scrollTop - navHeight + top + height / 2 + 46}px`;
     }
 
     // Put it after the last block
@@ -202,9 +205,9 @@ window.editorFns = {
         .children()
         .last()[0];
       const { top, height } = elLastBlock.getBoundingClientRect();
-      elWA.style.top = `${window.scrollY + top + height / 2 + 46}px`;
+      elWA.style.top = `${scrollTop - navHeight + top + height / 2 + 46}px`;
     }
-    elWA.style.left = `${window.scrollX + left - 40}px`;
+    elWA.style.left = `${left - 40}px`;
   },
 
   onBlurEditor: e => {

@@ -47,17 +47,99 @@
   padding: 24px;
   height: 560px;
   position: absolute;
-  right: 16px;
+  right: 8px;
+  top: 56px;
   z-index: 3;
 
-  .tokens-list {
-    padding-bottom: 24px;
-    &:last-child {
-      padding-bottom: 0;
+  .content-review {
+    .display(flex);
+    .flex-direction(column);
+    height: 100%;
+
+
+    .header {
+      margin-bottom: 16px;
+
+      .add-tokens-button {
+        .plus-button;
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        width: 36px;
+        height: 36px;
+        z-index: 3;
+      }
     }
 
-    li {
-      margin-bottom: 4px;
+    .empty-state {
+      flex: 1 1 auto;
+      border: 2px dashed @grey25;
+      border-radius: 4px;
+
+      &__message {
+        text-align: center;
+        width: 250px;
+        user-select: none;
+      }
+
+      &:before {
+        content: url("./assets/images/arrow.svg");
+        position: absolute;
+        top: 40px;
+        left: 40%;
+      }
+    }
+  }
+
+  .content-add {
+    .display(flex);
+    .flex-direction(column);
+    height: 100%;
+
+    .header {
+      margin-bottom: 16px;
+
+      .tokens-filter {
+        .display(flex);
+        height: 48px;
+        width: 100%;
+        outline: none;
+        .text-small-label;
+        border-radius: 2px;
+        border: 1px solid @grey25;
+        padding: 0 40px;
+
+        .placeholderStyles({
+          color: @grey50;
+        });
+
+        &:active, &:focus {
+          border-color: @grey;
+        }
+      }
+
+      .search-icon {
+        position: absolute;
+        top: 32px;
+        left: 32px;
+      }
+
+      .close-button {
+        cursor: pointer;
+        position: absolute;
+        top: 32px;
+        right: 32px;
+      }
+    }
+
+    .tokens-list {
+      flex: 1 1 auto;
+      padding: 8px 0;
+      overflow-y: scroll;
+
+      li {
+        margin-bottom: 8px;
+      }
     }
   }
 }

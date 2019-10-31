@@ -72,28 +72,65 @@
       </div>
     </div>
 
-    <div id="widget-adder">
-      <div
-        class="button"
-        onmousedown="window.editorFns.onClickWidgetAdder(event)"
-      ></div>
-      <ul class="panel--dark">
-        <li onmousedown="window.editorFns.thisIsAPrototype(event)">Image</li>
-        <li onmousedown="window.editorFns.thisIsAPrototype(event)">Video</li>
-        <li onmousedown="window.editorFns.thisIsAPrototype(event)">Table</li>
-        <li onmousedown="window.editorFns.thisIsAPrototype(event)">
-          Two columns
-        </li>
-        <li onmousedown="window.editorFns.thisIsAPrototype(event)">
-          Google maps
-        </li>
-        <li onmousedown="window.tokenFns.onClickQuickAddToken(event)">Token</li>
-      </ul>
-    </div>
-
-    <div id="tokens-panel" class="panel">
-      <div class="content">
-        <h4>Contact tokens</h4>
+    <div id="tokens-panel" class="panel hide">
+      <div class="content-review">
+        <div class="header">
+          <h4>Tokens on page</h4>
+          <div
+            class="add-tokens-button right"
+            onclick="window.tokenFns.onClickTokensPanelSwitchView(event)"
+          ></div>
+        </div>
+        <div class="empty-state center">
+          <div class="empty-state__message">
+            <h4>Add a token to your page</h4>
+            <p>You haven't added any tokens to this page</p>
+          </div>
+        </div>
+      </div>
+      <div class="content-add hide">
+        <div class="header">
+          <input
+            class="tokens-filter search-input search-icon-med"
+            type="text"
+            placeholder="Type to filter token list"
+            onkeyup="window.tokenFns.onKeyUpTokensPanelFilter(event)"
+            autofocus
+          />
+          <div class="search-icon left">
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M21.0661 8.5443C17.6461 5.09532 12.0779 5.17446 8.62955 8.65211C5.18116 12.1298 5.10269 17.7452 8.52265 21.1942C11.6198 24.3176 16.4787 24.5475 19.9295 21.9803L23.4837 25.5646C24.0593 26.1451 24.9926 26.1451 25.5682 25.5646C26.1438 24.9841 26.1438 24.0429 25.5682 23.4624L21.9863 19.8501C24.3816 16.3841 24.1049 11.6089 21.0661 8.5443ZM10.2694 10.3059C12.8429 7.71062 16.9424 7.69323 19.4262 10.1981C21.91 12.703 21.8927 16.8372 19.3193 19.4325C16.7458 22.0278 12.6464 22.0452 10.1625 19.5403C7.67874 17.0355 7.69599 12.9012 10.2694 10.3059Z"
+                fill="#81A2B2"
+              />
+            </svg>
+          </div>
+          <div
+            class="close-button right"
+            onclick="window.tokenFns.onClickTokensPanelSwitchView(event)"
+          >
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M23 10.41L21.59 9L16 14.59L10.41 9L9 10.41L14.59 16L9 21.59L10.41 23L16 17.41L21.59 23L23 21.59L17.41 16L23 10.41Z"
+                fill="#81A2B2"
+              />
+            </svg>
+          </div>
+        </div>
         <ul class="tokens-list">
           <li>
             <span class="token draggable master" contenteditable="false"
@@ -145,10 +182,6 @@
               >Website URL</span
             >
           </li>
-        </ul>
-
-        <h4>Company tokens</h4>
-        <ul class="tokens-list">
           <li>
             <span class="token draggable master" contenteditable="false"
               >Company.City</span
@@ -183,29 +216,194 @@
       </div>
     </div>
 
-    <div class="editor">
-      <h1
-        class="text-block undeletable dropzone"
-        contenteditable="true"
-        onkeydown="window.editorFns.onKeyDownEditor(event)"
-        onkeyup="window.editorFns.onKeyUpEditor(event)"
-        onfocus="window.editorFns.onFocusEditor(event)"
-        onblur="window.editorFns.onBlurEditor(event)"
-      >
-        A proposal for
-        <span class="token draggable" contenteditable="false"
-          >Company.Name</span
+    <nav id="editor-nav">
+      <div class="left nav__left">
+        <h4 class="page-title">Proposal template</h4>
+      </div>
+      <div class="right nav__right">
+        <div class="inline-icon-button share-with-team">
+          <div class="inline-icon-button__button">
+            <div
+              class="inline-icon-button__button-icon center"
+              onClick="window.editorFns.thisIsAPrototype(event)"
+              style="width: 36px; height: 36px;"
+            >
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M24 13.5C24 14.8807 22.8807 16 21.5 16C20.1193 16 19 14.8807 19 13.5C19 12.1193 20.1193 11 21.5 11C22.8807 11 24 12.1193 24 13.5ZM21.2354 17.823C22.243 17.823 23.1775 17.5189 23.9471 17C25.0867 17.0333 26 17.942 26 19.0582V23.7426C26 23.8848 25.8815 24 25.7353 24H17V19.0582C17 18.0904 17.6866 17.2786 18.612 17.0581C19.3644 17.5416 20.2661 17.823 21.2354 17.823Z"
+                  fill="#81A2B2"
+                  fill-opacity="0.5"
+                />
+                <path
+                  d="M15.5392 15.5758L15.3919 15.56L15.2665 15.6389C14.3513 16.2147 13.2239 16.5569 12.0001 16.5569C10.7762 16.5569 9.64885 16.2147 8.73369 15.6389L8.60827 15.56L8.46093 15.5758C6.87998 15.7455 5.57333 16.9439 5.57333 18.4872V23.7494C5.57333 24.1743 5.94659 24.4267 6.28571 24.4267H17.7143C18.0534 24.4267 18.4267 24.1743 18.4267 23.7494V18.4872C18.4267 16.944 17.1201 15.7455 15.5392 15.5758Z"
+                  fill="#81A2B2"
+                  stroke="white"
+                  stroke-width="0.853333"
+                />
+                <path
+                  d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z"
+                  fill="#81A2B2"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="button button--is-idle button--primary button--small button--normal center"
+          onClick="window.editorFns.thisIsAPrototype(event)"
         >
-      </h1>
-      <p
-        class="text-block undeletable dropzone"
-        contenteditable="true"
-        onkeydown="window.editorFns.onKeyDownEditor(event)"
-        onkeyup="window.editorFns.onKeyUpEditor(event)"
-        onfocus="window.editorFns.onFocusEditor(event)"
-        onblur="window.editorFns.onBlurEditor(event)"
-      ></p>
+          <div class="button__text">Use template</div>
+        </div>
+
+        <div class="inline-icon-button tokens">
+          <div class="inline-icon-button__button">
+            <div
+              class="inline-icon-button__button-icon center"
+              onClick="window.tokenFns.onClickNavbarTokens(event)"
+              style="width: 36px; height: 36px;"
+            >
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M25 14C25 18.9706 20.9706 23 16 23C11.0294 23 7 18.9706 7 14C7 9.02944 11.0294 5 16 5C20.9706 5 25 9.02944 25 14ZM23 14C23 17.866 19.866 21 16 21C12.134 21 9 17.866 9 14C9 10.134 12.134 7 16 7C19.866 7 23 10.134 23 14ZM16 20C19.3137 20 22 17.3137 22 14C22 10.6863 19.3137 8 16 8C12.6863 8 10 10.6863 10 14C10 17.3137 12.6863 20 16 20ZM15.5 11C15.2239 11 15 11.2239 15 11.5V13C15 13.5523 14.5523 14 14 14V14C13.588 14 13.3528 14.4704 13.6 14.8L15.0965 16.7954L15.103 16.804L15.6 17.4667C15.8 17.7333 16.2 17.7333 16.4 17.4667L16.897 16.804L16.9035 16.7953L18.4 14.8C18.6472 14.4704 18.412 14 18 14V14C17.4477 14 17 13.5523 17 13V11.5C17 11.2239 16.7761 11 16.5 11H15.5ZM7.5 25C7.22386 25 7 25.2239 7 25.5V26.5C7 26.7761 7.22386 27 7.5 27H24.5C24.7761 27 25 26.7761 25 26.5V25.5C25 25.2239 24.7761 25 24.5 25H7.5Z"
+                  fill="#81A2B2"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="inline-icon-button notifications">
+          <div class="inline-icon-button__button">
+            <div
+              class="inline-icon-button__button-icon center"
+              onClick="window.editorFns.thisIsAPrototype(event)"
+              style="width: 36px; height: 36px;"
+            >
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  opacity="0.5"
+                  d="M18.25 8.125C18.25 8.57001 18.118 9.00502 17.8708 9.37503C17.6236 9.74504 17.2722 10.0334 16.861 10.2037C16.4499 10.374 15.9975 10.4186 15.561 10.3318C15.1246 10.245 14.7237 10.0307 14.409 9.71599C14.0943 9.40132 13.8801 9.00041 13.7932 8.56395C13.7064 8.1275 13.751 7.6751 13.9213 7.26396C14.0916 6.85283 14.38 6.50143 14.75 6.25419C15.12 6.00696 15.555 5.875 16 5.875C16.5967 5.875 17.169 6.11205 17.591 6.53401C18.0129 6.95597 18.25 7.52826 18.25 8.125Z"
+                  fill="#81A2B2"
+                />
+                <path
+                  d="M21.25 21.2501V16.7501C21.2967 16.0949 21.2114 15.4369 20.999 14.8153C20.7866 14.1937 20.4516 13.621 20.0137 13.1314C19.5758 12.6417 19.044 12.245 18.4499 11.9648C17.8557 11.6846 17.2114 11.5265 16.555 11.5001C15.8142 11.3866 15.0574 11.4395 14.3396 11.655C13.6218 11.8705 12.9609 12.2431 12.4051 12.7458C11.8492 13.2485 11.4123 13.8687 11.126 14.5613C10.8397 15.2539 10.7113 16.0016 10.75 16.7501V21.2501C10.75 22.4951 8.995 23.5001 7.75 23.5001V25.7501H24.25V23.5001C23.005 23.5001 21.25 22.4951 21.25 21.2501Z"
+                  fill="#81A2B2"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="inline-icon-button options">
+          <div class="inline-icon-button__button">
+            <div
+              class="inline-icon-button__button-icon center"
+              onClick="window.editorFns.thisIsAPrototype(event)"
+              style="width: 36px; height: 36px;"
+            >
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M16 12C17.1046 12 18 11.1046 18 10C18 8.89543 17.1046 8 16 8C14.8954 8 14 8.89543 14 10C14 11.1046 14.8954 12 16 12ZM16 24C17.1046 24 18 23.1046 18 22C18 20.8954 17.1046 20 16 20C14.8954 20 14 20.8954 14 22C14 23.1046 14.8954 24 16 24ZM18 16C18 17.1046 17.1046 18 16 18C14.8954 18 14 17.1046 14 16C14 14.8954 14.8954 14 16 14C17.1046 14 18 14.8954 18 16Z"
+                  fill="#81A2B2"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="scroll-area">
+      <div class="editor">
+        <h1
+          class="text-block undeletable dropzone"
+          contenteditable="true"
+          onkeydown="window.editorFns.onKeyDownEditor(event)"
+          onkeyup="window.editorFns.onKeyUpEditor(event)"
+          onfocus="window.editorFns.onFocusEditor(event)"
+          onblur="window.editorFns.onBlurEditor(event)"
+        >
+          A proposal for
+          <span class="token draggable" contenteditable="false"
+            >Company.Name</span
+          >
+        </h1>
+        <p
+          class="text-block undeletable dropzone"
+          contenteditable="true"
+          onkeydown="window.editorFns.onKeyDownEditor(event)"
+          onkeyup="window.editorFns.onKeyUpEditor(event)"
+          onfocus="window.editorFns.onFocusEditor(event)"
+          onblur="window.editorFns.onBlurEditor(event)"
+        ></p>
+      </div>
+
+      <div id="widget-adder">
+        <div
+          class="widget-adder__button"
+          onmousedown="window.editorFns.onClickWidgetAdder(event)"
+        ></div>
+        <ul class="panel--dark">
+          <li onmousedown="window.editorFns.thisIsAPrototype(event)">
+            Image
+          </li>
+          <li onmousedown="window.editorFns.thisIsAPrototype(event)">
+            Video
+          </li>
+          <li onmousedown="window.editorFns.thisIsAPrototype(event)">
+            Table
+          </li>
+          <li onmousedown="window.editorFns.thisIsAPrototype(event)">
+            Two columns
+          </li>
+          <li onmousedown="window.editorFns.thisIsAPrototype(event)">
+            Google maps
+          </li>
+          <li onmousedown="window.tokenFns.onClickQuickAddToken(event)">
+            Token
+          </li>
+        </ul>
+      </div>
     </div>
+
+    <script>
+      less = {
+        env: "development",
+        javascriptEnabled: true
+      };
+    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -217,7 +415,6 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js"></script>
     <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script>
 
     <script src="AnnotationDrag.js"></script>

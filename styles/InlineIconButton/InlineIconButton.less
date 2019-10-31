@@ -1,0 +1,40 @@
+.inline-icon-button {
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  position: relative;
+  width: 36px;
+  height: 36px;
+
+  &--disabled {
+    cursor: unset;
+  }
+
+  &__button {
+    .transition(all 0.2s ease-out);
+    border-radius: 2px;
+  }
+
+  &:hover:not(.inline-icon-button--disabled) .inline-icon-button__button {
+    background: @grey10;
+  }
+
+  &.active .inline-icon-button__button {
+    background: @grey10;
+  }
+
+  .inline-icon-button__tooltip {
+    .calibre;
+    .medium;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 12px;
+    border-radius: 5px;
+
+    background-color: @midnight;
+
+    &.show {
+      opacity: 1;
+    }
+  }
+}

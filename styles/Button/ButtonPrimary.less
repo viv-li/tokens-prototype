@@ -1,0 +1,10 @@
+.button--primary:not(.button--is-disabled) {
+  color: white;
+  * {
+    fill: white;
+  }
+  background-color: @emerald;
+  &.button--is-idle:hover {
+    box-shadow: 0 0 0 3px fade(@emerald, 25%);
+  }
+}

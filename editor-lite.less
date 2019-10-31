@@ -2,7 +2,7 @@ body {
   .sans;
   .regular;
   font-size: @font-size-m;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 h1 {
@@ -74,8 +74,31 @@ strong {
   .modal-lg {max-width: 900px;}
 }
 
+.plus-button {
+  &:before {
+    content: '+';
+    font-size: 28px;
+    line-height: 14px;
+    display: inline-block;
+    padding: 10px 9px;
+  }
+  
+  color: @grey;
+  border: 1px solid @grey-25;
+  background-color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 18px;
+  outline: none;
+  cursor: pointer;
+
+  &:hover, &:active {
+    box-shadow: 0 0 0 3px @grey-25
+  }
+}
+
 #widget-adder {
-  position: relative;
+  position: absolute;
   top: -100px;
   left: -100px;
   z-index: 5;
@@ -84,27 +107,8 @@ strong {
   margin-top: -18px;
   transition: top ease-out 150ms;
 
-  .button {
-    &:before {
-      content: '+';
-      font-size: 28px;
-      line-height: 14px;
-      display: inline-block;
-      padding: 10px 9px;
-    }
-    
-    color: @grey;
-    border: 1px solid @grey-25;
-    background-color: white;
-    width: 36px;
-    height: 36px;
-    border-radius: 18px;
-    outline: none;
-    cursor: pointer;
-
-    &:hover, &:active {
-      box-shadow: 0 0 0 3px @grey-25
-    }
+  .widget-adder__button {
+    .plus-button;
   }
 
   ul {
@@ -198,10 +202,85 @@ strong {
   }
 }
 
+.editor-nav-tooltip {
+  .tooltip;
+  top: 72px;
+  .bottom-tooltip-animation;
+}
+
+#editor-nav {
+  height: 68px;
+  padding: 16px;
+  border-bottom: 1px solid @grey25;
+  position: fixed;
+  width: 100%;
+  background: white;
+  z-index: 1;
+
+  .page-title {
+    margin-top: 4px;
+  }
+
+  .nav__right {
+    .display(flex);
+
+    & > * {
+      margin: 0 4px;
+    }
+  }
+
+  .share-with-team {
+    &:hover {
+      &:before {
+        .editor-nav-tooltip;
+        content: 'Share with team';
+      }
+    }
+  }
+  .tokens {
+    &:hover {
+      &:before {
+        .editor-nav-tooltip;
+        content: 'Tokens';
+      }
+    }
+
+    &.active:hover {
+      &:before {
+        content: '';
+      }
+    }
+  }
+  .notifications {
+    &:hover {
+      &:before {
+        .editor-nav-tooltip;
+        content: 'Notifications';
+      }
+    }
+  }
+  .options {
+    &:hover {
+      &:before {
+        .editor-nav-tooltip;
+        content: 'More actions';
+        left: -32px;
+      }
+    }
+  }
+}
+
+.scroll-area {
+  overflow-y: scroll;
+  position: relative;
+  top: 68px;
+  height: ~"calc(100vh -  68px)";
+}
+
 .editor {
   width: 800px;
   margin: auto;
-  padding-bottom: 60px;
+  padding: 60px 0;
   color: @midnight;
 
   img {
@@ -325,6 +404,11 @@ strong {
   animation-delay: 0.3s;
 }
 
+.bottom-tooltip-animation {
+  .tooltip-animation;
+  animation-name: bottom-tooltip-animation;
+}
+
 @keyframes tooltip-animation {
   0% {
     transform: translate(-50%, -100%);
@@ -339,6 +423,22 @@ strong {
     opacity: 1;
   }
 }
+
+@keyframes bottom-tooltip-animation {
+  0% {
+    transform: translate(-50%, -100%);
+    opacity: 0;
+  }
+  5% {
+    transform: translate(-50%, -125%);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -100%);
+    opacity: 1;
+  }
+}
+
 
 .editor-widget {
   padding: 16px;
@@ -375,5 +475,5 @@ strong {
 }
 
 .hide {
-  display: none;
+  display: none !important;
 }

@@ -80,5 +80,33 @@ window.tokenFns = {
       setEndOfContenteditable(elTextBlock);
     }
     elToken.remove();
+  },
+
+  onClickNavbarTokens: e => {
+    $("#tokens-panel .content-review").removeClass("hide");
+    $("#tokens-panel .content-add").addClass("hide");
+    $("#tokens-panel").toggleClass("hide");
+    $(".inline-icon-button.tokens").toggleClass("active");
+  },
+
+  onClickTokensPanelSwitchView: e => {
+    $("#tokens-panel .content-review").toggleClass("hide");
+    $("#tokens-panel .content-add").toggleClass("hide");
+  },
+
+  onKeyUpTokensPanelFilter: e => {
+    const filterString = e.target.value.toLowerCase();
+    const tokensList = $("#tokens-panel .tokens-list").children("li");
+    tokensList.each(i => {
+      const elLi = tokensList[i];
+      const tokenString = elLi
+        .querySelector(".token")
+        .textContent.toLowerCase();
+      if (tokenString.includes(filterString)) {
+        elLi.classList.remove("hide");
+      } else {
+        elLi.classList.add("hide");
+      }
+    });
   }
 };
