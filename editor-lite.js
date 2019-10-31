@@ -184,7 +184,6 @@ window.editorFns = {
     const navHeight = 68;
     const elWA = document.getElementById("widget-adder");
     const { top, left, height } = elTextBlock.getBoundingClientRect();
-    console.log(top, left, height);
     // If it's an empty line position quick add beside it
     if (elTextBlock.textContent === "" || elTextBlock.textContent === "+") {
       elWA.style.top = `${scrollTop - navHeight + top + height / 2}px`;
