@@ -17,12 +17,12 @@
 .add-calibre(@suffix, @font-weight, @font-style) {
   @font-face {
     font-family: "calibre";
-    src: url("/Assets/fonts/CalibreWeb-@{suffix}.eot");
+    src: url("assets/fonts/CalibreWeb-@{suffix}.eot");
     src:
-      url("/Assets/fonts/CalibreWeb-@{suffix}.eot?#iefix")
+      url("assets/fonts/CalibreWeb-@{suffix}.eot?#iefix")
       format("embedded-opentype"),
-      url("/Assets/fonts/CalibreWeb-@{suffix}.woff2") format("woff2"),
-      url("/Assets/fonts/CalibreWeb-@{suffix}.woff") format("woff");
+      url("assets/fonts/CalibreWeb-@{suffix}.woff2") format("woff2"),
+      url("assets/fonts/CalibreWeb-@{suffix}.woff") format("woff");
     font-weight: @font-weight;
     font-style: @font-style;
   }
