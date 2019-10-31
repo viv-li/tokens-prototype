@@ -82,7 +82,13 @@ window.tokenFns = {
     elToken.remove();
   },
 
+  closeTokensPanel: () => {
+    $("#tokens-panel").addClass("hide");
+    $(".inline-icon-button.tokens").removeClass("active");
+  },
+
   onClickNavbarTokens: e => {
+    e.stopPropagation();
     $("#tokens-panel .content-review").removeClass("hide");
     $("#tokens-panel .content-add").addClass("hide");
     $("#tokens-panel").toggleClass("hide");
@@ -90,6 +96,7 @@ window.tokenFns = {
   },
 
   onClickTokensPanelSwitchView: e => {
+    e.stopPropagation();
     $("#tokens-panel .content-review").toggleClass("hide");
     const $addView = $("#tokens-panel .content-add").toggleClass("hide");
     if (!$addView[0].classList.contains("hide")) {
@@ -100,6 +107,7 @@ window.tokenFns = {
   },
 
   onKeyUpTokensPanelFilter: e => {
+    e.stopPropagation();
     const filterString = e.target.value.toLowerCase();
     const tokensList = $("#tokens-panel .tokens-list").children("li");
     tokensList.each(i => {

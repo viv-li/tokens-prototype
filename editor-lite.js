@@ -50,6 +50,7 @@ window.editorFns = {
   },
   onClick: e => {
     window.editorFns.unselectAllWidgets();
+    window.tokenFns.closeTokensPanel();
   },
 
   // For key behaviour around widgets
@@ -286,7 +287,9 @@ window.editorFns = {
   }
 };
 
-document.addEventListener("click", window.editorFns.onClick);
+document
+  .querySelector("main")
+  .addEventListener("click", window.editorFns.onClick);
 document.addEventListener("keydown", window.editorFns.onKeyDown);
 window.onload = () => {
   $("p.text-block.undeletable").focus();
