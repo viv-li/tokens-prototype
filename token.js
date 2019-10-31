@@ -91,7 +91,12 @@ window.tokenFns = {
 
   onClickTokensPanelSwitchView: e => {
     $("#tokens-panel .content-review").toggleClass("hide");
-    $("#tokens-panel .content-add").toggleClass("hide");
+    const $addView = $("#tokens-panel .content-add").toggleClass("hide");
+    if (!$addView[0].classList.contains("hide")) {
+      setTimeout(() => {
+        $("#tokens-panel .tokens-filter").focus();
+      }, 0);
+    }
   },
 
   onKeyUpTokensPanelFilter: e => {
