@@ -353,12 +353,7 @@
             onkeyup="window.editorFns.onKeyUpEditor(event)"
             onfocus="window.editorFns.onFocusEditor(event)"
             onblur="window.editorFns.onBlurEditor(event)"
-          >
-            A proposal for
-            <span class="token draggable" contenteditable="false"
-              >Company.Name</span
-            >&nbsp;
-          </h1>
+          ></h1>
           <p
             class="text-block undeletable dropzone"
             contenteditable="true"
@@ -372,7 +367,7 @@
         <div id="widget-adder">
           <div
             class="widget-adder__button"
-            onmousedown="window.editorFns.onClickWidgetAdder(event)"
+            onclick="window.editorFns.onClickWidgetAdder(event)"
           ></div>
           <ul class="panel--dark">
             <li onmousedown="window.editorFns.thisIsAPrototype(event)">

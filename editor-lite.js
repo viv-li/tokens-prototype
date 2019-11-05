@@ -48,9 +48,15 @@ window.editorFns = {
     }
     window.editorFns.hideAllToolbars();
   },
+
   onClick: e => {
     window.editorFns.unselectAllWidgets();
     window.tokenFns.closeTokensPanel();
+    window.editorFns.closeWidgetAdderMenu();
+  },
+
+  closeWidgetAdderMenu: () => {
+    $("#widget-adder").removeClass("show-menu");
   },
 
   // For key behaviour around widgets
@@ -217,6 +223,7 @@ window.editorFns = {
 
   onClickWidgetAdder: e => {
     e.preventDefault();
+    e.stopPropagation();
 
     if (window.lastFocussedLine.textContent !== "") {
       window.editorFns.createNewTextBlockAfter(window.lastFocussedLine);
@@ -286,7 +293,7 @@ document
   .addEventListener("click", window.editorFns.onClick);
 document.addEventListener("keydown", window.editorFns.onKeyDown);
 window.onload = () => {
-  const startTextBlock = $("p.text-block.undeletable");
+  const startTextBlock = $("h1.text-block.undeletable");
   window.editorFns.positionWidgetAdder(startTextBlock[0]);
   setTimeout(() => {
     startTextBlock.focus();
