@@ -93,12 +93,36 @@ window.tokenFns = {
     $("#tokens-panel .content-add").addClass("hide");
     $("#tokens-panel").toggleClass("hide");
     $(".inline-icon-button.tokens").toggleClass("active");
+    window.tokenFns.renderTokensReview();
+  },
+
+  renderTokensReview: () => {
+    if ($(".editor").find(".token").length === 0) {
+      $("#tokens-panel .content-review .empty-state").removeClass("hide");
+      $("#tokens-panel .content-review .tokens-summary").addClass("hide");
+    } else {
+      const $tokensSummary = $("#tokens-panel .content-review .tokens-summary");
+      $tokensSummary[0].innerHTML = "";
+      for (let elToken of document.querySelectorAll(".editor .token")) {
+        const elClonedToken = $(elToken)
+          .clone(true)
+          .removeClass("draggable");
+        $("<p/>")
+          .append(elClonedToken)
+          .appendTo($tokensSummary);
+      }
+
+      $("#tokens-panel .content-review .empty-state").addClass("hide");
+      $("#tokens-panel .content-review .tokens-summary").removeClass("hide");
+    }
   },
 
   onClickTokensPanelSwitchView: e => {
     e.stopPropagation();
+    window.tokenFns.renderTokensReview();
     $("#tokens-panel .content-review").toggleClass("hide");
     const $addView = $("#tokens-panel .content-add").toggleClass("hide");
+    // If we're in add view
     if (!$addView[0].classList.contains("hide")) {
       setTimeout(() => {
         $("#tokens-panel .tokens-filter").focus();
@@ -109,6 +133,10 @@ window.tokenFns = {
   onKeyUpTokensPanelFilter: e => {
     e.stopPropagation();
     const filterString = e.target.value.toLowerCase();
+    window.tokenFns.filterTokensList(filterString);
+  },
+
+  filterTokensList: filterString => {
     const tokensList = $("#tokens-panel .tokens-list").children("li");
     tokensList.each(i => {
       const elLi = tokensList[i];
@@ -121,5 +149,14 @@ window.tokenFns = {
         elLi.classList.add("hide");
       }
     });
+  },
+
+  onClickClearTokensFilter: e => {
+    e.stopPropagation();
+    $("#tokens-panel .tokens-filter")[0].value = "";
+    window.tokenFns.filterTokensList("");
+    setTimeout(() => {
+      $("#tokens-panel .tokens-filter").focus();
+    }, 0);
   }
 };

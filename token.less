@@ -38,7 +38,7 @@
     -webkit-user-select: none;
     user-select: none;
     -webkit-user-drag: element;
-    cursor: move !important;
+    cursor: grab !important;
   }
 }
 
@@ -99,6 +99,12 @@
     .header {
       margin-bottom: 16px;
 
+      .back-button {
+        padding-right: 8px;
+        padding-top: 2px;
+        cursor: pointer;
+      }
+
       .tokens-filter {
         .display(flex);
         height: 48px;
@@ -120,14 +126,14 @@
 
       .search-icon {
         position: absolute;
-        top: 32px;
+        top: 72px;
         left: 32px;
       }
 
       .close-button {
         cursor: pointer;
         position: absolute;
-        top: 32px;
+        top: 72px;
         right: 32px;
       }
     }
@@ -139,6 +145,8 @@
 
       li {
         margin-bottom: 8px;
+        line-height: 1.5;
+        display: inline-block;
       }
     }
   }
