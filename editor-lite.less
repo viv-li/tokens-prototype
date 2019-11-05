@@ -99,8 +99,6 @@ strong {
 
 #widget-adder {
   position: absolute;
-  top: -100px;
-  left: -100px;
   z-index: 5;
   width: 36px;
   height: 36px;
@@ -316,8 +314,13 @@ strong {
   p {
     &:empty:before {
       content: "+ to add more content";
-      opacity: 0.5;
+      opacity: 0.25;
       position: absolute;
+      color: @midnight;
+    }
+
+    &.hide-placeholder:before {
+      content: "";
     }
   }
   

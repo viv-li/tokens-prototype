@@ -177,6 +177,7 @@ window.editorFns = {
   onFocusEditor: e => {
     window.editorFns.unselectAllWidgets();
     window.editorFns.positionWidgetAdder(e.target);
+    e.target.classList.remove("hide-placeholder");
     window.lastFocussedLine = e.target;
   },
 
@@ -211,16 +212,9 @@ window.editorFns = {
   },
 
   onBlurEditor: e => {
-    if (e.target.id !== "widget-adder") {
-      window.editorFns.hideWidgetAdder();
-    }
+    e.target.classList.add("hide-placeholder");
   },
-  hideWidgetAdder: () => {
-    const elWA = document.getElementById("widget-adder");
-    elWA.style.top = `-100px`;
-    elWA.style.left = `-100px`;
-    elWA.classList.remove("show-menu");
-  },
+
   onClickWidgetAdder: e => {
     e.preventDefault();
 
@@ -292,5 +286,9 @@ document
   .addEventListener("click", window.editorFns.onClick);
 document.addEventListener("keydown", window.editorFns.onKeyDown);
 window.onload = () => {
-  $("p.text-block.undeletable").focus();
+  const startTextBlock = $("p.text-block.undeletable");
+  window.editorFns.positionWidgetAdder(startTextBlock[0]);
+  setTimeout(() => {
+    startTextBlock.focus();
+  }, 0);
 };
