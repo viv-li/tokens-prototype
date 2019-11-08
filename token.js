@@ -104,13 +104,19 @@ window.tokenFns = {
     } else {
       const $tokensSummary = $("#tokens-panel .content-review .tokens-summary");
       $tokensSummary[0].innerHTML = "";
+      const uniqueTokens = [];
       for (let elToken of document.querySelectorAll(".editor .token")) {
-        const elClonedToken = $(elToken)
-          .clone(true)
-          .removeClass("draggable");
-        $("<p/>")
-          .append(elClonedToken)
-          .appendTo($tokensSummary);
+        if (!uniqueTokens.includes(elToken.textContent)) {
+          const elClonedToken = $(elToken)
+            .clone(true)
+            .addClass("master");
+          $("<p/>")
+            .append(elClonedToken)
+            .appendTo($tokensSummary);
+
+          uniqueTokens.push(elToken.textContent);
+          window.TokenDrag.bindDraggables();
+        }
       }
 
       $("#tokens-panel .content-review .empty-state").addClass("hide");
