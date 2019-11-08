@@ -89,6 +89,7 @@ window.tokenFns = {
 
   onClickNavbarTokens: e => {
     e.stopPropagation();
+    $(".text-block").blur();
     $("#tokens-panel .content-review").removeClass("hide");
     $("#tokens-panel .content-add").addClass("hide");
     $("#tokens-panel").toggleClass("hide");
