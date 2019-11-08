@@ -34,8 +34,7 @@ window.tokenFns = {
     setTimeout(() => {
       $token.find("input")[0].focus();
     }, 0);
-    window.tokenFns.positionTokensTypeahead($token[0]);
-    window.tokenFns.showTokensTypeahead();
+    window.tokenFns.positionAndShowTokensTypeahead($token[0]);
   },
 
   addTokenAtCursor: () => {
@@ -56,11 +55,10 @@ window.tokenFns = {
     setTimeout(() => {
       $token.find("input")[0].focus();
     }, 0);
-    window.tokenFns.positionTokensTypeahead($token[0]);
-    window.tokenFns.showTokensTypeahead();
+    window.tokenFns.positionAndShowTokensTypeahead($token[0]);
   },
 
-  positionTokensTypeahead: elToken => {
+  positionAndShowTokensTypeahead: elToken => {
     const scrollTop = document.querySelector(".scroll-area").scrollTop;
     const elTypeahead = document.getElementById("tokens-typeahead");
     const { bottom, left } = elToken.getBoundingClientRect();
@@ -68,6 +66,11 @@ window.tokenFns = {
     elTypeahead.style.top = `${scrollTop + bottom + 8}px`;
     elTypeahead.style.left = `${left}px`;
     window.currentToken = elToken;
+
+    const filterString = elToken.querySelector("input").value;
+    const tokensList = $("#tokens-typeahead .tokens-list").children("li");
+    window.tokenFns.filterTokensList(filterString, tokensList);
+    window.tokenFns.showTokensTypeahead();
   },
 
   showTokensTypeahead: () => {
@@ -83,16 +86,14 @@ window.tokenFns = {
     e.preventDefault();
     window.currentToken.querySelector("input").value = e.target.textContent;
     window.tokenFns.completeToken(window.currentToken);
-    window.currentToken = null;
   },
 
   onFocusTokenInput: e => {
-    window.tokenFns.showTokensTypeahead();
     window.currentToken = e.target.closest(".token");
+    window.tokenFns.positionAndShowTokensTypeahead(window.currentToken);
   },
   onBlurTokenInput: e => {
     window.tokenFns.hideTokensTypeahead();
-    window.currentToken = null;
   },
   onKeyUpTokenInput: e => {
     const filterString = e.target.value.toLowerCase();
@@ -231,7 +232,8 @@ window.tokenFns = {
   onClickClearTokensFilter: e => {
     e.stopPropagation();
     $("#tokens-panel .tokens-filter")[0].value = "";
-    window.tokenFns.filterTokensList("");
+    const tokensList = $("#tokens-panel .tokens-list").children("li");
+    window.tokenFns.filterTokensList("", tokensList);
     setTimeout(() => {
       $("#tokens-panel .tokens-filter").focus();
     }, 0);
