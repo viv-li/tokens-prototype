@@ -400,8 +400,17 @@ strong {
   transform: translate(-50%, -100%);
 }
 
+.tooltip--large {
+  .tooltip;
+  .text-description;
+  width: 205px;
+  white-space: normal;
+  text-align: center;
+  padding: 16px;
+}
+
 .tooltip-animation {
-  animation: 0.3s ease tooltip-animation;
+  animation: 1.2s ease tooltip-animation;
   transform-origin: 50%;
   animation-fill-mode: both;
   animation-delay: 0.3s;
@@ -421,7 +430,7 @@ strong {
     transform: translate(-50%, -75%);
     opacity: 0;
   }
-  100% {
+  25% {
     transform: translate(-50%, -100%);
     opacity: 1;
   }

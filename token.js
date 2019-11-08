@@ -16,6 +16,12 @@ window.tokenFns = {
       textBlock.lastChild.textContent += "\u00A0";
     }
     $token.appendTo(textBlock);
+
+    $token.addClass("show-hint");
+    setTimeout(() => {
+      $token.removeClass("show-hint");
+    }, 3000);
+
     window.TokenDrag.bindDraggables();
 
     setTimeout(() => {

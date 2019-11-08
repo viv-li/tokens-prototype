@@ -8,10 +8,18 @@
   transition: background-color ease-out 250ms;
   white-space: nowrap;
   max-width: 800px;
-  overflow: hidden;
+  // overflow: hidden;
   text-overflow: ellipsis;
   vertical-align: bottom;
   margin-bottom: -1px;
+  position: relative;
+
+  &.show-hint:after {
+    .tooltip--large;
+    content: "Psst, you can also type “{{” to add a token.";
+    animation-iteration-count: 2;
+    animation-direction: alternate;
+  }
 
   &.incomplete {
     background-color: fade(@blue, 5%);

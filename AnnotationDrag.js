@@ -176,6 +176,10 @@ function AnnotationDrag(args) {
       const clonedNode = this.dropLoadNode.cloneNode(true);
       clonedNode.classList.remove("master");
       range.insertNode(clonedNode);
+      clonedNode.classList.add("show-hint");
+      setTimeout(() => {
+        clonedNode.classList.remove("show-hint");
+      }, 3000);
     } else {
       range.insertNode(this.dropLoadNode);
     }
