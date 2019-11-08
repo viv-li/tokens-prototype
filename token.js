@@ -14,6 +14,8 @@ window.tokenFns = {
       !/\s$/.test(textBlock.lastChild.textContent)
     ) {
       textBlock.lastChild.textContent += "\u00A0";
+    } else if (!textBlock.hasChildNodes()) {
+      textBlock.append(document.createTextNode("\u00A0"));
     }
     $token.appendTo(textBlock);
 
