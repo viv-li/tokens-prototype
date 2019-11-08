@@ -13,6 +13,9 @@
   vertical-align: bottom;
   margin-bottom: -1px;
   position: relative;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 
   &.show-hint:after {
     .tooltip--large;
@@ -42,19 +45,29 @@
     background: none;
     border: none;
     color: inherit;
+    max-width: 8em;
   }
 
   &.draggable {
     position: relative;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
     -webkit-user-drag: element;
     cursor: grab !important;
 
     &:hover {
       box-shadow: 0px 2px 4px 0 fade(@midnight, 50%);
     }
+  }
+}
+
+.tokens-list {
+  flex: 1 1 auto;
+  padding: 8px 0;
+  overflow-y: scroll;
+
+  li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+    display: block;
   }
 }
 
@@ -135,17 +148,31 @@
         right: 8px;
       }
     }
+  }
+}
 
-    .tokens-list {
-      flex: 1 1 auto;
-      padding: 8px 0;
-      overflow-y: scroll;
+#tokens-typeahead {
+  width: 265px;
+  height: 220px;
+  position: absolute;
+  z-index: 4;
+  .display(flex);
+  .flex-direction(column);
 
-      li {
-        margin-bottom: 8px;
-        line-height: 1.5;
-        display: block;
-      }
+  .tokens-list {
+    padding: 8px;
+    .flex(1 1 auto);
+
+    .token {
+      cursor: pointer;
     }
+  }
+
+  header {
+    border-bottom: 1px solid @grey25;
+    .text-small-label;
+    text-align: center;
+    padding: 8px;
+    color: @grey50;
   }
 }
