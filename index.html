@@ -73,14 +73,25 @@
     </div>
 
     <div id="tokens-panel" class="panel hide">
-      <div class="content-review">
-        <div class="header">
-          <h4>Tokens on page</h4>
+      <div class="header">
+        <h3>Tokens</h3>
+        <div class="tabs">
           <div
-            class="add-tokens-button right"
-            onclick="window.tokenFns.onClickTokensPanelSwitchView(event)"
-          ></div>
+            class="tab tab-review active"
+            onclick="window.tokenFns.onClickTokensPanelTabReview(event)"
+          >
+            On this page
+          </div>
+          <div
+            class="tab tab-add"
+            onclick="window.tokenFns.onClickTokensPanelTabAdd(event)"
+          >
+            From CRM
+          </div>
         </div>
+      </div>
+
+      <div class="content content-review">
         <div class="empty-state center">
           <div class="empty-state__message">
             <h4>Add a token to your page</h4>
@@ -89,33 +100,11 @@
         </div>
         <div class="tokens-summary hide"></div>
       </div>
-      <div class="content-add hide">
-        <div class="header">
-          <h4>
-            <span
-              class="back-button left"
-              onclick="window.tokenFns.onClickTokensPanelSwitchView(event)"
-            >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M6.29289 12.7071C6.68342 13.0976 7.31658 13.0976 7.70711 12.7071C8.09763 12.3166 8.09763 11.6834 7.70711 11.2929L5.41421 9L13 9C13.5523 9 14 8.55228 14 8C14 7.44772 13.5523 7 13 7L5.41421 7L7.70711 4.70711C8.09763 4.31658 8.09763 3.68342 7.70711 3.29289C7.31658 2.90237 6.68342 2.90237 6.29289 3.29289L2.29289 7.29289C1.90237 7.68342 1.90237 8.31658 2.29289 8.70711L6.29289 12.7071Z"
-                  fill="#81A2B2"
-                />
-              </svg>
-            </span>
-            Add tokens
-          </h4>
 
+      <div class="content content-add hide">
+        <div class="tokens-filter">
           <input
-            class="tokens-filter search-input search-icon-med"
+            class="tokens-filter__input"
             type="text"
             placeholder="Type to filter token list"
             onkeyup="window.tokenFns.onKeyUpTokensPanelFilter(event)"
@@ -136,8 +125,10 @@
               />
             </svg>
           </div>
-          <div class="close-button right" 
-          onclick="window.tokenFns.onClickClearTokensFilter(event)">
+          <div
+            class="close-button right"
+            onclick="window.tokenFns.onClickClearTokensFilter(event)"
+          >
             <svg
               width="32"
               height="32"

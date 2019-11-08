@@ -489,3 +489,26 @@ strong {
 .hide {
   display: none !important;
 }
+
+.tabs {
+  border-bottom: 1px solid @grey25;
+  margin: 0 -24px;
+  padding: 0 24px;
+  color: @grey;
+  .text-large-label;
+  
+  .tab {
+    display: inline-block;
+    padding: 8px;
+    cursor: pointer;
+  
+    &:hover {
+      color: @midnight;
+    }
+
+    &.active {
+      border-bottom: 3px solid @blue;
+      color: @midnight;
+    }
+  }
+}

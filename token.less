@@ -21,6 +21,10 @@
     animation-direction: alternate;
   }
 
+  &.master:after {
+    display: none;
+  }
+
   &.incomplete {
     background-color: fade(@blue, 5%);
     
@@ -63,26 +67,17 @@
   top: 56px;
   z-index: 3;
 
-  .content-review {
+  .header {
+    margin-bottom: 24px;
+  }
+
+  .content {
     .display(flex);
     .flex-direction(column);
-    height: 100%;
+    height: 404px;
+  }
 
-
-    .header {
-      margin-bottom: 16px;
-
-      .add-tokens-button {
-        .plus-button;
-        position: absolute;
-        top: 24px;
-        right: 24px;
-        width: 36px;
-        height: 36px;
-        z-index: 3;
-      }
-    }
-
+  .content-review {
     .empty-state {
       flex: 1 1 auto;
       border: 2px dashed @grey25;
@@ -97,27 +92,18 @@
       &:before {
         content: url("./assets/images/arrow.svg");
         position: absolute;
-        top: 40px;
-        left: 40%;
+        top: 100px;
+        left: 110px;
       }
     }
   }
 
   .content-add {
-    .display(flex);
-    .flex-direction(column);
-    height: 100%;
-
-    .header {
+    .tokens-filter {
+      position: relative;
       margin-bottom: 16px;
 
-      .back-button {
-        padding-right: 8px;
-        padding-top: 2px;
-        cursor: pointer;
-      }
-
-      .tokens-filter {
+      &__input {
         .display(flex);
         height: 48px;
         width: 100%;
@@ -138,15 +124,15 @@
 
       .search-icon {
         position: absolute;
-        top: 72px;
-        left: 32px;
+        top: 8px;
+        left: 8px;
       }
-
+  
       .close-button {
         cursor: pointer;
         position: absolute;
-        top: 72px;
-        right: 32px;
+        top: 8px;
+        right: 8px;
       }
     }
 
@@ -158,7 +144,7 @@
       li {
         margin-bottom: 8px;
         line-height: 1.5;
-        display: inline-block;
+        display: block;
       }
     }
   }

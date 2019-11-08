@@ -91,6 +91,7 @@ window.tokenFns = {
   closeTokensPanel: () => {
     $("#tokens-panel").addClass("hide");
     $(".inline-icon-button.tokens").removeClass("active");
+    window.tokenFns.onClickTokensPanelTabReview();
   },
 
   onClickNavbarTokens: e => {
@@ -130,17 +131,22 @@ window.tokenFns = {
     }
   },
 
-  onClickTokensPanelSwitchView: e => {
-    e.stopPropagation();
+  onClickTokensPanelTabReview: e => {
     window.tokenFns.renderTokensReview();
-    $("#tokens-panel .content-review").toggleClass("hide");
-    const $addView = $("#tokens-panel .content-add").toggleClass("hide");
-    // If we're in add view
-    if (!$addView[0].classList.contains("hide")) {
-      setTimeout(() => {
-        $("#tokens-panel .tokens-filter").focus();
-      }, 0);
-    }
+    $("#tokens-panel .content-review").removeClass("hide");
+    $("#tokens-panel .content-add").addClass("hide");
+    $("#tokens-panel .tab-review").addClass("active");
+    $("#tokens-panel .tab-add").removeClass("active");
+  },
+
+  onClickTokensPanelTabAdd: e => {
+    $("#tokens-panel .content-review").addClass("hide");
+    $("#tokens-panel .content-add").removeClass("hide");
+    $("#tokens-panel .tab-review").removeClass("active");
+    $("#tokens-panel .tab-add").addClass("active");
+    setTimeout(() => {
+      $("#tokens-panel .tokens-filter__input").focus();
+    }, 0);
   },
 
   onKeyUpTokensPanelFilter: e => {
