@@ -177,12 +177,10 @@ function AnnotationDrag(args) {
       const clonedNode = this.dropLoadNode.cloneNode(true);
       clonedNode.classList.remove("master");
       range.insertNode(clonedNode);
-      clonedNode.classList.add("show-hint");
-      setTimeout(() => {
-        clonedNode.classList.remove("show-hint");
-      }, 3000);
+      window.tokenFns.positionAndShowTokensHint(clonedNode);
     } else {
       range.insertNode(this.dropLoadNode);
+      window.tokenFns.hideTokensHint();
     }
 
     // Insert in original range after node was placed so it stays before

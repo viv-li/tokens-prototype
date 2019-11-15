@@ -17,17 +17,6 @@
   -webkit-user-select: none;
   user-select: none;
 
-  &.show-hint:after {
-    .tooltip--large;
-    content: "Psst, you can also type “{{” to add a token.";
-    animation-iteration-count: 2;
-    animation-direction: alternate;
-  }
-
-  &.master:after {
-    display: none;
-  }
-
   &.incomplete {
     background-color: fade(@blue, 5%);
 
@@ -180,5 +169,60 @@
     text-align: center;
     padding: 8px;
     color: @grey50;
+  }
+}
+
+#tokens-hint {
+  .text-description;
+  .panel--dark;
+  .hint-animation;
+  color: white;
+  background-color: @slate;
+  position: absolute;
+  border-radius: 2px;
+  width: 300px;
+  z-index: 4;
+  transform: translate(0, -20px);
+
+  &:before {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: @slate;
+    transform: rotate(45deg);
+    top: 16px;
+    left: -4px;
+  }
+
+  .hint-text {
+    .text-description;
+    padding: 12px;
+    margin-bottom: 0;
+  }
+
+  .close-button {
+    position: absolute;
+    cursor: pointer;
+    top: 4px;
+    right: 4px;
+  }
+}
+
+.hint-animation {
+  animation: 0.3s ease-out hint-animation;
+  transform-origin: 50%;
+  animation-fill-mode: both;
+  animation-delay: 0.3s;
+}
+
+@keyframes hint-animation {
+  0% {
+    transform: translate(-10px, -20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, -20px);
+    opacity: 1;
   }
 }
