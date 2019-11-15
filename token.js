@@ -163,6 +163,11 @@ window.tokenFns = {
     window.tokenFns.renderTokensReview();
   },
 
+  onClickCloseTokensPanel: e => {
+    e.stopPropagation();
+    window.tokenFns.closeTokensPanel();
+  },
+
   renderTokensReview: () => {
     if ($(".editor").find(".token").length === 0) {
       $("#tokens-panel .content-review .empty-state").removeClass("hide");

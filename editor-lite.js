@@ -51,7 +51,6 @@ window.editorFns = {
 
   onClick: e => {
     window.editorFns.unselectAllWidgets();
-    window.tokenFns.closeTokensPanel();
     window.editorFns.closeWidgetAdderMenu();
   },
 

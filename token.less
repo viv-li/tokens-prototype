@@ -1,5 +1,5 @@
 .token {
-  display:inline-block;
+  display: inline-block;
   background: fade(@blue, 25%);
   padding: 0 8px;
   min-width: 16px;
@@ -30,7 +30,7 @@
 
   &.incomplete {
     background-color: fade(@blue, 5%);
-    
+
     &:before {
       content: "{{";
       margin-left: -16px;
@@ -38,7 +38,7 @@
 
     padding-left: 24px;
   }
-  
+
   &__input {
     margin-left: -6px;
     outline: none;
@@ -79,6 +79,13 @@
   right: 8px;
   top: 56px;
   z-index: 3;
+
+  .close-button {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    cursor: pointer;
+  }
 
   .header {
     margin-bottom: 24px;
@@ -126,11 +133,10 @@
         border: 1px solid @grey25;
         padding: 0 40px;
 
-        .placeholderStyles({
-          color: @grey50;
-        });
+        .placeholderStyles({color: @grey50;});
 
-        &:active, &:focus {
+        &:active,
+        &:focus {
           border-color: @grey;
         }
       }
@@ -140,7 +146,7 @@
         top: 8px;
         left: 8px;
       }
-  
+
       .close-button {
         cursor: pointer;
         position: absolute;
