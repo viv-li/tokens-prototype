@@ -117,6 +117,7 @@ function AnnotationDrag(args) {
       this.dropLoad = content;
       this.dropLoadNode = e.target;
       $(e.target).attr("dragged", "dragged");
+      $("#widget-adder").addClass("hide");
     }
   };
 
@@ -212,6 +213,7 @@ function AnnotationDrag(args) {
     if (typeof this.onDragEndCallback === "function") {
       this.onDragEndCallback(event);
     }
+    $("#widget-adder").removeClass("hide");
   };
 
   this.getRangeFromDrop = e => {
